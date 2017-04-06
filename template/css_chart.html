@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css only bar chart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #efefef;
+        }
+
+        li,
+        ol {
+            list-style: none;
+        }
+
+        .board {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .board-items {
+            padding: 12.5px;
+            background-color: #fff;
+        }
+
+        .board-items h2 {
+            font-size: 14px;
+        }
+
+        .board-items p {
+            color: #333;
+            font-size: 12px;
+        }
+
+        .board-items__content {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .board-items__tab {
+            white-space: nowrap;
+            font-size: 0;
+            overflow-x: auto;
+        }
+
+        .board-items__tab li {
+            display: inline-block;
+            border: 1px solid #333;
+            border-right: none;
+            list-style: none;
+        }
+
+        .board-items__tab li:last-child {
+            border-right: 1px solid #333;
+        }
+
+        .board-items__tab li a {
+            height: 32px;
+            padding-right: 24px;
+            padding-left: 24px;
+            font-size: 13px;
+            line-height: 32px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .board-items__chart-wrapper {
+            margin: 0 auto;
+            margin-top: 10px;
+            max-width: 320px;
+        }
+
+        .board-items__chart-item {
+            float: left;
+            width: 33.33%;
+            height: 160px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .board-items__chart-list:after {
+            content: "";
+            clear: both;
+            display: block;
+        }
+        /* 이미지 영역 */
+
+        .board-items__chart-area {
+            position: relative;
+            width: 40px;
+            height: 100%;
+            background-color: rgba(224, 224, 224, 0.7);
+            margin: 0 auto;
+            margin-bottom: 10px;
+        }
+        /* 차트 데이터 영역 */
+
+        .board-items__chart-data {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+        $(function() {
+            // 글로벌 dataSet
+            let firstData = 52;
+            let secondData = 70;
+            let thirdData = 62;
+
+            // 처음 랜더링할 때 차트뿌려주기
+            $('.board-items__chart-item').eq(0).find('.board-items__chart-data').animate({
+                'height': firstData + '%',
+            }, 'easing').css('backgroundColor', '#d823d3');
+
+            $('.board-items__chart-item').eq(1).find('.board-items__chart-data').animate({
+                'height': secondData + '%',
+            }, 'easing').css('backgroundColor', '#139040');
+
+            $('.board-items__chart-item').eq(2).find('.board-items__chart-data').animate({
+                'height': thirdData + '%',
+            }, 'easing').css('backgroundColor', '#222');
+            $(".board-items__tab li").click(function() {
+
+                // 키워드로 제어하기?
+                let keyword = $(this).text();
+                if (keyword === '열정') {
+                    firstData = 48;
+                    secondData = 78;
+                    thirdData = 52;
+                } else if (keyword === '용기') {
+                    firstData = 17;
+                    secondData = 55;
+                    thirdData = 62;
+                } else if (keyword === '재미') {
+                    firstData = 42;
+                    secondData = 90;
+                    thirdData = 17;
+                }
+
+                // 차트 3개 바로바로 변하게 animate를 활용해서 effect를 준다
+                // 실전에서는 json 형태의 data를 가공해서 적절하게 넣어서 변화시켜주기
+                $('.board-items__chart-item').eq(0).find('.board-items__chart-data').animate({
+                    'height': firstData + '%',
+                }, 'easing').css('backgroundColor', '#d823d3');
+
+                $('.board-items__chart-item').eq(1).find('.board-items__chart-data').animate({
+                    'height': secondData + '%',
+                }, 'easing').css('backgroundColor', '#139040');
+
+                $('.board-items__chart-item').eq(2).find('.board-items__chart-data').animate({
+                    'height': thirdData + '%',
+                }, 'easing').css('backgroundColor', '#222');
+
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div class="board">
+        <div class="board-items">
+            <div class="board-items__header">
+                <h2>차트테스트</h2>
+                <p>차트 부연설명을 넣을 공간입니다. description을 넣어주세요.</p>
+            </div>
+
+            <div class="board-items__content">
+                <ul class="board-items__tab">
+                    <li><a href="#">열정</a></li>
+                    <li><a href="#">용기</a></li>
+                    <li><a href="#">재미</a></li>
+                    <li><a href="#">화남</a></li>
+                    <li><a href="#">열정</a></li>
+                    <li><a href="#">용기</a></li>
+                    <li><a href="#">재미</a></li>
+                    <li><a href="#">화남</a></li>
+                    <li><a href="#">열정</a></li>
+                    <li><a href="#">용기</a></li>
+                    <li><a href="#">재미</a></li>
+                    <li><a href="#">화남</a></li>
+                    <li><a href="#">열정</a></li>
+                    <li><a href="#">용기</a></li>
+                    <li><a href="#">재미</a></li>
+                    <li><a href="#">화남</a></li>
+                </ul>
+
+                <div class="board-items__chart-wrapper">
+                    <ul class="board-items__chart-list">
+                        <li class="board-items__chart-item">
+                            <div class="board-items__chart-area">
+                                <span class="board-items__chart-data">
+
+                                </span>
+                            </div>
+                            <p>지난회차</p>
+                        </li>
+                        <li class="board-items__chart-item">
+                            <div class="board-items__chart-area">
+                                <span class="board-items__chart-data">
+
+                                </span>
+                            </div>
+                            <p>해당회차</p>
+                        </li>
+                        <li class="board-items__chart-item">
+                            <div class="board-items__chart-area">
+                                <span class="board-items__chart-data">
+
+                                </span>
+                            </div>
+                            <p>예능평균</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
